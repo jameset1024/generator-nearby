@@ -1,6 +1,6 @@
 {
   "name": "generator-nearby",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Scaffolding for Laraval, Docker, Gulp, and Webpack",
   "homepage": "https://nearbycreative.com",
   "author": {
@@ -38,6 +38,7 @@
     "axios": "^0.21.1",
     "chalk": "^2.1.0",
     "fs-extra": "^9.0.1",
+    "rimraf": "^3.0.2",
     "yeoman-generator": "^2.0.1",
     "yosay": "^2.0.1"
   },

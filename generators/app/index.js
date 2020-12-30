@@ -7,6 +7,7 @@ const fs = require('fs');
 const fsExtra = require('fs-extra');
 const admZip = require('adm-zip');
 const { execSync } = require('child_process');
+const rimraf = require('rimraf');
 
 const githubDownoad = 'https://codeload.github.com/laravel/laravel/zip/';
 const laravelInformation = 'https://api.github.com/repos/laravel/laravel/releases/latest';
@@ -74,7 +75,7 @@ module.exports = class extends Generator {
       //Copy the contents of the found directory into the main templates directory, then delete the directory
       if (src) {
         fsExtra.copySync(src, __dirname + '/templates');
-        fs.rmdirSync(src, {recursive: true});
+        rimraf(src);
       }
 
       //Copy everything from the templates directory to the project root
