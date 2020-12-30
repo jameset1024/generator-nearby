@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Erik Thomas",
+      "authorEmail": "erik@brightthought.co",
+      "authorUrl": ""
+    }
+  }
+}

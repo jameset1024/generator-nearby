@@ -1,0 +1,29 @@
+{
+	"port": 9000,
+	"baseUrl": "./",
+	"url": "http://localhost:8080",
+    "inject": "build/gulp/inject/stack.blade.php",
+	"entries": {
+		"script": "main.+(js|ts)",
+		"css": "main.+(sass|scss)"
+	},
+	"directories": {
+		"source": "resources/",
+		"app": "app/",
+		"destination": "public/dist/",
+		"css": "css/",
+		"scripts": "js/",
+		"images": "img/",
+		"fonts": "fonts/",
+        "views": "resources/views/"
+	},
+	"author": {
+		"name": "[your name]",
+		"version": "v1.0.0",
+		"link": "exaample.com",
+		"lincense": "MIT",
+		"coding": "Coding by [your name]",
+		"phone": "XXXXXXXXXX",
+		"email": "example@email.com"
+	}
+}

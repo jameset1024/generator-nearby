@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -o allexport
+if [ -f ./.env ]; then
+    source ./.env
+fi
+set +o allexport
+
+export WWWUSER=${WWWUSER:-$UID}
+export WWWGROUP=${WWWGROUP:-$(id -g)}
+
+if [ $# -gt 0 ]; then
+    docker-compose "$@"
+else
+    docker-compose ps
+fi
