@@ -1,7 +1,7 @@
 # generator-nearby [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > Creates a scaffold for Laravel, Docker, Gulp, and Webpack
 
-Below are commands that can be run after installation has completed
+In order to use this generator you must have Docker and Composer installed on your maching. Below are commands that can be run after installation has completed
 
 Commands:
 

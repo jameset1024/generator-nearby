@@ -1,6 +1,6 @@
 {
   "name": "generator-nearby",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Scaffolding for Laraval, Docker, Gulp, and Webpack",
   "homepage": "https://nearbycreative.com",
   "author": {
