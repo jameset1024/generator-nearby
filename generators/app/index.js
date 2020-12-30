@@ -75,7 +75,9 @@ module.exports = class extends Generator {
       //Copy the contents of the found directory into the main templates directory, then delete the directory
       if (src) {
         fsExtra.copySync(src, __dirname + '/templates');
-        rimraf.sync(src);
+        rimraf.sync(src, {}, function(){
+          console.log('Directory Deleted.');
+        });
       }
 
       //Copy everything from the templates directory to the project root
