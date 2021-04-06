@@ -1,44 +1,42 @@
 import { args } from "./utils";
-import TerserPlugin from "terser-webpack-plugin";
 
 const WebpackConfig = {
-	mode: !args.production ? "development" : "production",
-	devtool: !args.production ? "cheap-eval-source-map" : false,
-	output: {
-		filename: "[name].js"
-	},
-	optimization: {
-		splitChunks: {
-			// include all types of chunks
-			chunks: "all"
-		},
-		minimize: !args.production ? false : true
-	},
-	plugins: [],
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				exclude: /(node_modules|bower_components)/,
-				use: {
-					loader: "babel-loader",
-					options: {
-						presets: ["@babel/preset-env"]
-					}
-				}
-			}
-		]
-	}
+  mode: !args.production ? "development" : "production",
+  devtool: !args.production ? "inline-source-map" : "source-map",
+  target: ['web'],
+  output: {
+    filename: "[name].js"
+  },
+  optimization: {
+    splitChunks: {
+      // include all types of chunks
+      chunks: "all"
+    },
+    minimize: args.production,
+    minimizer: [
+      (compiler) => {
+        const TerserPlugin = require('terser-webpack-plugin');
+        new TerserPlugin({
+          parallel: true,
+          extractComments: true
+        }).apply(compiler);
+      }
+    ]
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env","@babel/preset-react"]
+          }
+        }
+      }
+    ]
+  }
 };
-
-if (args.production) {
-	WebpackConfig.plugins.push(
-		new TerserPlugin({
-			cache: true,
-			parallel: true,
-			extractComments: false
-		})
-	);
-}
 
 module.exports = WebpackConfig;

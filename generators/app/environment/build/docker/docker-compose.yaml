@@ -2,26 +2,29 @@
 version: '3'
 services:
   laravel.test:
+    container_name: nearby-http
+    image: nearby/dev
     build:
-      context: ./../../vendor/laravel/sail/runtimes/8.0
+      context: .
       dockerfile: Dockerfile
       args:
         WWWGROUP: '${WWWGROUP}'
-    image: sail-8.0/app
     ports:
       - '${APP_PORT:-80}:80'
     environment:
       WWWUSER: '${WWWUSER}'
       LARAVEL_SAIL: 1
+      PHP_IDE_CONFIG: 'serverName=myapp.url'
     volumes:
       - '../../:/var/www/html'
     networks:
-      - sail
+      - nearby
     depends_on:
       - mysql
       - redis
 
   mysql:
+    container_name: nearby-mysql
     image: 'mysql:8.0'
     ports:
       - '${FORWARD_DB_PORT:-3306}:3306'
@@ -32,33 +35,35 @@ services:
       MYSQL_PASSWORD: '${DB_PASSWORD}'
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     volumes:
-      - 'sailmysql:/var/lib/mysql'
+      - 'nearbymysql:/var/lib/mysql'
     networks:
-      - sail
+      - nearby
 
   redis:
+    container_name: nearby-redis
     image: 'redis:alpine'
     ports:
       - '${FORWARD_REDIS_PORT:-6379}:6379'
     volumes:
-      - 'sailredis:/data'
+      - 'nearbyredis:/data'
     networks:
-      - sail
+      - nearby
 
   mailhog:
+    container_name: nearby-mailhog
     image: 'mailhog/mailhog:latest'
     ports:
       - 1025:1025
       - 8025:8025
     networks:
-      - sail
+      - nearby
 
 networks:
-  sail:
+  nearby:
     driver: bridge
 
 volumes:
-  sailmysql:
+  nearbymysql:
     driver: local
-  sailredis:
+  nearbyredis:
     driver: local
